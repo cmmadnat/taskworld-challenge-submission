@@ -83,11 +83,13 @@ export default class MockDataProvider extends React.Component {
                 },
               })
             } else {
+              const errorCode = await response.text()
               this.setState({
                 transferOwnershipStatus: {
                   workspaceId: workspace.spaceId,
                   toUserId: user._id,
                   ...LoadState.error,
+                  errorCode,
                 },
               })
             }

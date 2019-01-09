@@ -214,6 +214,7 @@ export default class TerminateModalFlow extends React.Component {
             deleteWorkspaces={deleteWorkspaces}
             getTransferData={this.getTransferData}
             onAssignToUser={this.onAssignToUser}
+            onSetNextPage={this.onSetNextPage}
           />
         )
       case 'feedback':

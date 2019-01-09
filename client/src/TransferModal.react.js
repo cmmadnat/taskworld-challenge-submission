@@ -18,6 +18,8 @@ class TransferModal extends React.Component {
       user,
       getTransferData,
       onAssignToUser,
+      onSetNextPage,
+      transferOwnershipStatus,
     } = this.props
 
     const transferData = getTransferData()
@@ -25,13 +27,22 @@ class TransferModal extends React.Component {
     const totalWorkspaceRequiredTransfer = requiredTransferWorkspaces.length
     const totalWorkspaceDelete = deleteWorkspaces.length
     const disabledNextPage =
-      totalAssigned < totalWorkspaceRequiredTransfer || loading
+      totalAssigned < totalWorkspaceRequiredTransfer ||
+      loading ||
+      transferOwnershipStatus.status === 'error'
     return (
       <TransferOwnershipModal
-        nextPage={this.onSetNextPage}
+        nextPage={onSetNextPage}
         loading={loading}
         disabledNextPage={disabledNextPage}
       >
+        {transferOwnershipStatus.status === 'error' ? (
+          <p style={{ color: 'red' }}>
+            error : Error code "{transferOwnershipStatus.errorCode}"
+          </p>
+        ) : (
+          <p />
+        )}
         <WorkspaceGroupRows
           workspaces={requiredTransferWorkspaces}
           groupTitle="The following workspaces require ownership transfer:"
@@ -60,5 +71,6 @@ TransferModal.propTypes = {
   user: propTypes.object.isRequired,
   getTransferData: propTypes.func.isRequired,
   onAssignToUser: propTypes.func.isRequired,
+  onSetNextPage: propTypes.func.isRequired,
 }
 export default TransferModal
