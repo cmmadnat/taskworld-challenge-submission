@@ -119,7 +119,8 @@ export default class TerminateModalFlow extends React.Component {
         })),
       })
     }
-    this.submitSurvey()
+    // don't submit survey until the final step()
+    // this.submitSurvey()
   }
 
   onGoToPreviousStep = () => {
