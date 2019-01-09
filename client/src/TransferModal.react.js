@@ -23,7 +23,9 @@ class TransferModal extends React.Component {
     } = this.props
 
     const transferData = getTransferData()
-    const totalAssigned = transferData.length
+    const totalAssigned = transferData.filter(it => it.status === 'completed')
+      .length
+
     const totalWorkspaceRequiredTransfer = requiredTransferWorkspaces.length
     const totalWorkspaceDelete = deleteWorkspaces.length
     const disabledNextPage =
