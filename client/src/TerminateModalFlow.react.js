@@ -151,6 +151,7 @@ export default class TerminateModalFlow extends React.Component {
         reason: this.state.feedbacks,
       }
       this.props.terminateAccount(payload)
+      this.submitSurvey()
     } else {
       const error = 'Invalid email'
       this.props.terminateAccountError(error)
