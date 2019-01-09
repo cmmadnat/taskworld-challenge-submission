@@ -228,6 +228,7 @@ export default class TerminateModalFlow extends React.Component {
             showCommentForm
             comment={this.state.comment}
             onChangeComment={this.onChangeComment}
+            feedbacks={this.state.feedbacks}
           />
         )
       case 'confirm':

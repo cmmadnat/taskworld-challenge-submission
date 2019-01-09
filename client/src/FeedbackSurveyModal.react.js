@@ -12,20 +12,24 @@ class FeedbackSurveyModal extends React.PureComponent {
     showCommentForm: PropTypes.bool,
     comment: PropTypes.string,
     onChangeComment: PropTypes.func,
+    feedbacks: PropTypes.array,
   }
 
   constructor(props) {
     super(props)
-    this.state = this.setInitialState()
+    this.state = this.setInitialState(this.props.feedbacks)
   }
 
   state = {
     isFocusCommentBox: false,
   }
 
-  setInitialState = () => {
+  setInitialState = feedbacks => {
+    const feedbackText = feedbacks.map(it => it.reason)
     return _.chain(feedbackSurveyItems)
-      .map(item => [item.stack, false])
+      .map(item => {
+        return [item.stack, _.includes(feedbackText, item.stack)]
+      })
       .fromPairs()
       .value()
   }
