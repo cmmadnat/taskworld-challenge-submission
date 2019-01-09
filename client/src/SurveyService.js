@@ -39,7 +39,7 @@ const getChoiceID = key => {
   }
 }
 
-const getSurveyPayload = (feedbackRefs, comment) => {
+export const getSurveyPayload = (feedbackRefs, comment) => {
   const surveyAnswers = _.map(feedbackRefs, ref => {
     if (getChoiceID(ref.key) === CANCEL_WORKSPACE.CHOICE_ID.OTHERS) {
       return {

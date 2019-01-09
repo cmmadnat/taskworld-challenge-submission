@@ -98,10 +98,15 @@ export default class TerminateModalFlow extends React.Component {
   }
 
   submitSurvey = () => {
-    const feedbackRefs = this.getRefsValues(this.refs, 'feedbackForm')
+    // const feedbackRefs = this.getRefsValues(this.refs, 'feedbackForm')
+    const feedbackRefs = this.state.feedbacks.map(it => ({
+      key: it.reason,
+      value: it.comment,
+    }))
+    const comment = this.state.comment
     const surveyPayload = {
       feedbackRefs,
-      comment: '',
+      comment,
     }
     submitToSurveyMonkeyDeleteAccount(surveyPayload)
   }

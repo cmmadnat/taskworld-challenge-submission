@@ -11,7 +11,8 @@
     "@types/react": "16.4.16",
     "@types/react-dom": "16.0.9",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "cross-env": "5.1.4"
+    "cross-env": "5.1.4",
+    "jest": "^23.6.0"
   },
   "dependencies": {
     "autoprefixer": "8.2.0",
