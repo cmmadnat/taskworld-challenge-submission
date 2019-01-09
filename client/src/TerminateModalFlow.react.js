@@ -10,6 +10,8 @@ import { submitToSurveyMonkeyDeleteAccount } from './SurveyService'
 import * as LoadState from './LoadState'
 import AssignOwnership from './AssignOwnership.react'
 
+import TransferModal from './TransferModal.react'
+
 export default class TerminateModalFlow extends React.Component {
   static propTypes = {
     user: React.PropTypes.object.isRequired,
@@ -193,9 +195,27 @@ export default class TerminateModalFlow extends React.Component {
   }
 
   render() {
+    const {
+      transferOwnershipStatus,
+      requiredTransferWorkspaces,
+      deleteWorkspaces,
+      loading,
+      user,
+    } = this.props
     switch (this.state.activeModal) {
       case 'transfer':
-        return this.renderTransferModal()
+        return (
+          <TransferModal
+            transferOwnershipStatus={transferOwnershipStatus}
+            requiredTransferWorkspaces={requiredTransferWorkspaces}
+            deleteWorkspaces={deleteWorkspaces}
+            loading={loading}
+            user={user}
+            deleteWorkspaces={deleteWorkspaces}
+            getTransferData={this.getTransferData}
+            onAssignToUser={this.onAssignToUser}
+          />
+        )
       case 'feedback':
         return (
           <FeedbackSurveyModal
