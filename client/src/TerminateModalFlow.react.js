@@ -3,15 +3,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ConfirmEmailModal from './ConfirmEmailModal.react'
-import TransferOwnershipModal, {
-  WorkspaceGroupRows,
-} from './TransferOwnershipModal.react'
+// import TransferOwnershipModal, {
+//   WorkspaceGroupRows,
+// } from './TransferOwnershipModal.react'
 import FeedbackSurveyModal from './FeedbackSurveyModal.react'
 import { submitToSurveyMonkeyDeleteAccount } from './SurveyService'
 import * as LoadState from './LoadState'
-import AssignOwnership from './AssignOwnership.react'
+// import AssignOwnership from './AssignOwnership.react'
 
-import TransferModal from './TransferModal.react'
+// import TransferModal from './TransferModal.react'
 
 export default class TerminateModalFlow extends React.Component {
   static propTypes = {
