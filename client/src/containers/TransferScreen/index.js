@@ -3,11 +3,13 @@ import propTypes from 'prop-types'
 import _ from 'lodash'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 
 import TransferOwnershipModal, {
   WorkspaceGroupRows,
 } from './TransferOwnershipModal.react'
 import AssignOwnership from './AssignOwnership.react'
+import { loading } from './selectors'
 
 class TransferModal extends React.Component {
   state = {
@@ -79,12 +81,19 @@ TransferModal.propTypes = {
   onSetNextPage: propTypes.func.isRequired,
 }
 const withConnect = connect(
-  state => ({
-    requiredTransferWorkspaces: [],
-    transferOwnershipStatus: {},
-    deleteWorkspaces: [],
-    loading: false,
-    user: {},
+  //   state => ({
+  //     requiredTransferWorkspaces: [],
+  //     transferOwnershipStatus: {},
+  //     deleteWorkspaces: [],
+  //     loading: false,
+  //     user: {},
+  //   }),
+  createStructuredSelector({
+    transferOwnershipStatus,
+    requiredTransferWorkspaces,
+    deleteWorkspaces,
+    loading,
+    user,
   }),
   dispatch => ({
     getTransferData: () => [],
