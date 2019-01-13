@@ -17,6 +17,7 @@ import {
   transferOwnershipStatus,
   user,
 } from './selectors'
+import { checkWorkspaceConflict } from './actions'
 
 class TransferModal extends React.Component {
   state = {

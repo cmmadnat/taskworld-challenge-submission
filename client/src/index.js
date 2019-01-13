@@ -15,11 +15,16 @@ import FeedbackSurveyScreen from './containers/FeedbackSurveyScreen/index'
 import ConfirmEmailScreen from './containers/ConfirmEmailScreen/index'
 import { getTransferData } from './actions'
 import rootSaga from './sagas'
+import transferScreenSaga from './containers/TransferScreen/sagas'
 
 const sagaMiddleware = createSagaMiddleware()
-const store = createStore(combineReducers({ transferReducer }),applyMiddleware(sagaMiddleware) )
+const store = createStore(
+  combineReducers({ transferReducer }),
+  applyMiddleware(sagaMiddleware)
+)
 
 sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(transferScreenSaga)
 
 ReactDOM.render(
   <Provider store={store}>
@@ -28,7 +33,7 @@ ReactDOM.render(
         <Route
           path="/"
           exact
-          render={() => {            
+          render={() => {
             store.dispatch(getTransferData())
             return <TransferScreen />
           }}

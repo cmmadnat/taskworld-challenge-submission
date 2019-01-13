@@ -5,12 +5,15 @@ const initialState = fromJS({
   requiredTransferWorkspaces: [],
   transferOwnershipStatus: {
     workspaceId: '',
-    toUserId:'', 
-    
+    toUserId: '',
   },
   deleteWorkspaces: [],
   loading: false,
-  user: {},
+  user: {
+    _id: 'user1',
+    name: 'Ross Lynch',
+    email: 'ross@example.com',
+  },
 })
 const reducer = (state = initialState, action) => {
   switch (action.type) {
