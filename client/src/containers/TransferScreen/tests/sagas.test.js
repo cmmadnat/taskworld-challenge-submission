@@ -20,6 +20,15 @@ describe('transfer ownership sagas', () => {
     // expect(callValue).toEqual(call(transferOwnership, 'user1', 'user4', '123'))
 
     const putValue = get.next('Conflict').value
-    expect(putValue).toEqual(put(checkWorkspaceConflictComplete('Conflict')))
+    expect(putValue).toEqual(
+      put(
+        checkWorkspaceConflictComplete(
+          'Conflict',
+          'user4',          
+          '123',
+          'Conflict'
+        )
+      )
+    )
   })
 })
