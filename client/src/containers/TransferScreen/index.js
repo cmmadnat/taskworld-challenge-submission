@@ -9,7 +9,7 @@ import TransferOwnershipModal, {
   WorkspaceGroupRows,
 } from './TransferOwnershipModal.react'
 import AssignOwnership from './AssignOwnership.react'
-import { loading } from './selectors'
+import { loading,deleteWorkspaces,requiredTransferWorkspaces,selectDefaultDomain,transferOwnershipStatus,user } from './selectors'
 
 class TransferModal extends React.Component {
   state = {

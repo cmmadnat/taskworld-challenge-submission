@@ -10,7 +10,7 @@ const requiredTransferWorkspaces = createSelector(
   selectDefaultDomain,
   substate => substate.get('requiredTransferWorkspaces')
 )
-const loading = createSector(selectDefaultDomain, substate =>
+const loading = createSelector(selectDefaultDomain, substate =>
   substate.get('loading')
 )
 const deleteWorkspaces = createSelector(
@@ -20,11 +20,13 @@ const deleteWorkspaces = createSelector(
 const user = createSelector(
   selectDefaultDomain,
   substate => substate.get('user')
-)
+  )
+
+
 export {
   selectDefaultDomain,
   transferOwnershipStatus,
-  requiredTransferWork,
+  requiredTransferWorkspaces,
   deleteWorkspaces,
   loading,
   user,
