@@ -41,8 +41,6 @@ function* deleteAccountSaga() {
             value: filterList.length != 0 ? filterList[0].comment : '',
           }
         })
-      console.log(commentForName)
-      console.log(feedbackRefs)
       const surveyPayload = {
         feedbackRefs,
         comment,
