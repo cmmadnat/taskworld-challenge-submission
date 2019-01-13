@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export const WorkspaceGroupRows = props =>
   !props.shouldDisplay ? null : (
@@ -37,9 +38,12 @@ export const TransferOwnershipModal = props => {
         workspace admin rights to other person.
       </p>
       {props.loading ? renderLoading() : props.children}
-      <button disabled={props.disabledNextPage} onClick={props.nextPage}>
-        Next
-      </button>
+
+      <Link to="/feedback">
+        <button disabled={props.disabledNextPage} onClick={props.nextPage}>
+          Next
+        </button>
+      </Link>
     </div>
   )
 }

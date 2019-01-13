@@ -17,13 +17,11 @@ import {
   transferOwnershipStatus,
   user,
   getTransferData,
+  disabledNextPage
 } from './selectors'
 import { checkWorkspaceConflict } from './actions'
 
 class TransferModal extends React.Component {
-  state = {
-    transferData: [],
-  }
   render() {
     const {
       requiredTransferWorkspaces,
@@ -34,6 +32,7 @@ class TransferModal extends React.Component {
       onAssignToUser,
       onSetNextPage,
       transferOwnershipStatus,
+      disabledNextPage
     } = this.props
 
     const transferData = getTransferData
@@ -42,10 +41,6 @@ class TransferModal extends React.Component {
 
     const totalWorkspaceRequiredTransfer = requiredTransferWorkspaces.length
     const totalWorkspaceDelete = deleteWorkspaces.length
-    const disabledNextPage =
-      totalAssigned < totalWorkspaceRequiredTransfer ||
-      loading ||
-      transferOwnershipStatus.status === 'error'
     return (
       <TransferOwnershipModal
         nextPage={onSetNextPage}
@@ -88,6 +83,7 @@ TransferModal.propTypes = {
   getTransferData: propTypes.array.isRequired,
   onAssignToUser: propTypes.func.isRequired,
   onSetNextPage: propTypes.func.isRequired,
+  disabledNextPage:propTypes.bool.isRequired
 }
 const withConnect = connect(
   createStructuredSelector({
@@ -97,6 +93,7 @@ const withConnect = connect(
     loading,
     user,
     getTransferData,
+    disabledNextPage
   }),
   dispatch => ({
     onAssignToUser: (workspace, user) => {

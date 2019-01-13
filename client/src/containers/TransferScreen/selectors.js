@@ -31,6 +31,19 @@ const getTransferData = createSelector(
   selectDefaultDomain,
   substate => substate.transferData
 )
+
+const disabledNextPage = createSelector(
+  requiredTransferWorkspaces,
+  getTransferData,
+  loading,
+  transferOwnershipStatus,
+  (var1, var2, var3, var4) => {
+    return var2.length < var1.length || var3 || var4.status === 'error'
+  }
+)
+// totalAssigned < totalWorkspaceRequiredTransfer ||
+// loading ||
+// transferOwnershipStatus.status === 'error'
 export {
   selectDefaultDomain,
   transferOwnershipStatus,
@@ -39,4 +52,5 @@ export {
   loading,
   user,
   getTransferData,
+  disabledNextPage,
 }
