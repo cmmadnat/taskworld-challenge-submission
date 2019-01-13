@@ -46,6 +46,7 @@ function* deleteAccountSaga() {
         comment,
       }
       yield call(submitToSurveyMonkeyDeleteAccount, surveyPayload)
+      window.location = 'http://www.example.com/'
     } catch (e) {
       yield put(terminateAccountError(e.message))
     }
