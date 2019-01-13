@@ -1,6 +1,8 @@
 import { fromJS } from 'immutable'
 
-const initialState = fromJS({})
+const initialState = fromJS({
+  terminateAccountStatus: {},
+})
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     default:

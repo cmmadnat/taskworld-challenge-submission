@@ -15,6 +15,7 @@ import createSagaMiddleware from 'redux-saga'
 import './index.css'
 import transferReducer from './containers/TransferScreen/reducers'
 import feedbackReducer from './containers/FeedbackSurveyScreen/reducers'
+import confirmScreenReducer from './containers/ConfirmEmailScreen/reducers'
 
 import TransferScreen from './containers/TransferScreen/index'
 import FeedbackSurveyScreen from './containers/FeedbackSurveyScreen/index'
@@ -64,6 +65,7 @@ function createReducers(history) {
   return combineReducers({
     transferReducer,
     feedbackReducer,
+    confirmScreenReducer,
     router: connectRouter(history),
   })
 }
