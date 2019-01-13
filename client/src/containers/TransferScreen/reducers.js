@@ -1,12 +1,11 @@
 import { fromJS } from 'immutable'
 
 const initialState = fromJS({
-
-      requiredTransferWorkspaces: [],
-      transferOwnershipStatus: {},
-      deleteWorkspaces: [],
-      loading: false,
-      user: {},
+  requiredTransferWorkspaces: [],
+  transferOwnershipStatus: {},
+  deleteWorkspaces: [],
+  loading: false,
+  user: {},
 })
 const reducer = (state = initialState, action) => {
   switch (action.type) {

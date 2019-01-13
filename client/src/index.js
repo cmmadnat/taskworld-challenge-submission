@@ -12,6 +12,7 @@ import transferReducer from './containers/TransferScreen/reducers'
 import TransferScreen from './containers/TransferScreen/index'
 import FeedbackSurveyScreen from './containers/FeedbackSurveyScreen/index'
 import ConfirmEmailScreen from './containers/ConfirmEmailScreen/index'
+import { getTransferData } from './actions'
 
 const store = createStore(combineReducers({ transferReducer }))
 
@@ -19,7 +20,14 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div>
-        <Route path="/" exact component={TransferScreen} />
+        <Route
+          path="/"
+          exact
+          render={() => {            
+            store.dispatch(getTransferData())
+            return <TransferScreen />
+          }}
+        />
         <Route path="/feedback/" component={FeedbackSurveyScreen} />
         <Route path="/terminate/" component={ConfirmEmailScreen} />
       </div>

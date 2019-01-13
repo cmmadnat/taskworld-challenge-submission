@@ -9,7 +9,14 @@ import TransferOwnershipModal, {
   WorkspaceGroupRows,
 } from './TransferOwnershipModal.react'
 import AssignOwnership from './AssignOwnership.react'
-import { loading,deleteWorkspaces,requiredTransferWorkspaces,selectDefaultDomain,transferOwnershipStatus,user } from './selectors'
+import {
+  loading,
+  deleteWorkspaces,
+  requiredTransferWorkspaces,
+  selectDefaultDomain,
+  transferOwnershipStatus,
+  user,
+} from './selectors'
 
 class TransferModal extends React.Component {
   state = {
@@ -81,13 +88,6 @@ TransferModal.propTypes = {
   onSetNextPage: propTypes.func.isRequired,
 }
 const withConnect = connect(
-  //   state => ({
-  //     requiredTransferWorkspaces: [],
-  //     transferOwnershipStatus: {},
-  //     deleteWorkspaces: [],
-  //     loading: false,
-  //     user: {},
-  //   }),
   createStructuredSelector({
     transferOwnershipStatus,
     requiredTransferWorkspaces,

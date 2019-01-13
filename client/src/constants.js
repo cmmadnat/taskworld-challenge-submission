@@ -1,0 +1,1 @@
+export const GET_TRANSFER_DATA  = 'app/GET_TRANSFER_DATA'
