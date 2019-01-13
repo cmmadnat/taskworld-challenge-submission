@@ -1,5 +1,10 @@
 import { fromJS } from 'immutable'
-import { RESET_TERMINATE_ACCOUNT_STATUS, TYPE_EMAIL } from './constants'
+import {
+  RESET_TERMINATE_ACCOUNT_STATUS,
+  TYPE_EMAIL,
+  TERMINATE_ACCOUNT_ERROR,
+} from './constants'
+import * as LoadState from '../../reference/LoadState'
 
 const initialState = fromJS({
   email: '',
@@ -11,6 +16,12 @@ const reducer = (state = initialState, action) => {
       return state.set('terminateAccountStatus', fromJS({}))
     case TYPE_EMAIL:
       return state.set('email', action.payload)
+    case TERMINATE_ACCOUNT_ERROR:
+      const error = action.payload
+      return state.set(
+        'terminateAccountStatus',
+        LoadState.handleLoadFailedWithError(error)({})
+      )
     default:
       return state
   }

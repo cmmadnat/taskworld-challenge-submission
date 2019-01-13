@@ -1,5 +1,6 @@
 import {
   RESET_TERMINATE_ACCOUNT_STATUS,
+  TERMINATE_ACCOUNT_ERROR,
   TYPE_EMAIL,
   DELETE_ACCOUNT,
 } from './constants'
@@ -12,4 +13,8 @@ export const typeEmail = email => ({
 })
 export const deleteAccount = () => ({
   type: DELETE_ACCOUNT,
+})
+export const terminateAccountError = error => ({
+  type: TERMINATE_ACCOUNT_ERROR,
+  payload: error,
 })

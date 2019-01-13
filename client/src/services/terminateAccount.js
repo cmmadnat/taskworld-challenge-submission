@@ -15,17 +15,17 @@ export default payload => {
     }
   ).then(response => {
     if (response.status === 200) {
-      return {
-        terminateAccountStatus: LoadState.handleLoaded(
-          this.state.terminateAccountStatus
-        ),
-      }
+      // return {
+      //   terminateAccountStatus: LoadState.handleLoaded({}),
+      // }
+      return true
     } else {
-      return {
-        terminateAccountStatus: LoadState.handleLoadFailedWithError(
-          'Error deleting account'
-        )(this.state.terminateAccountStatus),
-      }
+      // return {
+      //   terminateAccountStatus: LoadState.handleLoadFailedWithError(
+      //     'Error deleting account'
+      //   )({}),
+      // }
+      throw new Error('Error deleteing account')
     }
   })
 }
