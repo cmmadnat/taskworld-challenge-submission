@@ -15,7 +15,17 @@ export const checkWorkspaceConflict = (workspace, user) => ({
   },
 })
 
-export const checkWorkspaceConflictComplete = result => ({
+export const checkWorkspaceConflictComplete = (
+  result,
+  user,
+  workspace,
+  errorCode
+) => ({
   type: CHECK_WORKSPACE_CONFLICT_COMPLETE,
-  payload: result,
+  payload: {
+    result,
+    user,
+    workspace,
+    errorCode,
+  },
 })

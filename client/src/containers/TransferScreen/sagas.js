@@ -8,7 +8,7 @@ export function* checkWorkspaceConflict(action) {
   const { workspace, user } = action.payload
   const fromUser = yield select(userSelector)
   const result = yield call(transferOwnership, fromUser, user, workspace)
-  yield put(checkWorkspaceConflictComplete(result))
+  yield put(checkWorkspaceConflictComplete(result, user, workspace, result))
 }
 
 export default function*() {
