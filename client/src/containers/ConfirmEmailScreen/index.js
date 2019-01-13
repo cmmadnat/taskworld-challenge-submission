@@ -5,9 +5,14 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { selectTerminateAccountStatus, selectEmail } from './selector'
 import { user, disabledNextPage } from '../TransferScreen/selectors'
-import { resetTerminateAccountStatus, typeEmail } from './actions'
+import {
+  resetTerminateAccountStatus,
+  typeEmail,
+  deleteAccount,
+} from './actions'
 
 import { isLoading } from '../../reference/LoadState'
+import { goBack } from 'connected-react-router'
 
 class ConfirmEmailModal extends React.PureComponent {
   static propTypes = {
@@ -28,7 +33,11 @@ class ConfirmEmailModal extends React.PureComponent {
 
   getStateButton = () => {
     if (isLoading(this.props.terminateAccountStatus)) return true
-    if (this.state.markedConsequences && this.props.email) return false
+    if (
+      this.state.markedConsequences &&
+      this.props.email === this.props.userEmail.email
+    )
+      return false
     return true
   }
 
@@ -68,7 +77,7 @@ class ConfirmEmailModal extends React.PureComponent {
           </label>
         </div>
         <div>
-          <button onClick={this.props.onBackButton}>Back</button>
+          <button onClick={() => this.props.onBackButton()}>Back</button>
           <button
             onClick={this.props.onClickToDelete}
             disabled={this.getStateButton()}
@@ -90,5 +99,7 @@ export default connect(
   dispatch => ({
     resetTerminateAccountStatus: () => dispatch(resetTerminateAccountStatus()),
     onTypeEmail: email => dispatch(typeEmail(email)),
+    onBackButton: () => dispatch(goBack()),
+    onClickToDelete: () => dispatch(deleteAccount()),
   })
 )(ConfirmEmailModal)
