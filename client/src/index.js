@@ -23,6 +23,7 @@ import ConfirmEmailScreen from './containers/ConfirmEmailScreen/index'
 import { getTransferData } from './actions'
 import rootSaga from './sagas'
 import transferScreenSaga from './containers/TransferScreen/sagas'
+import confirmEmailScreenSaga from './containers/ConfirmEmailScreen/sagas'
 
 const sagaMiddleware = createSagaMiddleware()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -36,6 +37,7 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga)
 sagaMiddleware.run(transferScreenSaga)
+sagaMiddleware.run(confirmEmailScreenSaga)
 
 ReactDOM.render(
   <Provider store={store}>
