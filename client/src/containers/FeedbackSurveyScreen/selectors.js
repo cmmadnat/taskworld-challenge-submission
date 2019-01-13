@@ -9,4 +9,8 @@ const selectFeedbacks = createSelector(
     return substate.feedbacks
   }
 )
-export { selectFeedbacks, showCommentForm }
+const selectComment = createSelector(
+  selectDomain,
+  substate => substate.comment
+)
+export { selectFeedbacks, showCommentForm, selectComment }

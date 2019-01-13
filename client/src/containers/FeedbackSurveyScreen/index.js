@@ -2,8 +2,8 @@ import _ from 'lodash'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
-import { selectFeedbacks, showCommentForm } from './selectors'
-import { saveFeedback } from './actions'
+import { selectFeedbacks, showCommentForm, selectComment } from './selectors'
+import { saveFeedback, changeComment } from './actions'
 import { push, goBack } from 'connected-react-router'
 
 import { feedbackSurveyItems } from './FeedbackSurveyItems'
@@ -88,7 +88,7 @@ class FeedbackSurveyModal extends React.Component {
                 ? { border: '1px solid blue' }
                 : { border: '1px solid black' }
             }
-            onChange={this.props.onChangeComment}
+            onChange={e => this.props.onChangeComment(e.target.value)}
             value={this.props.comment}
           />
         </div>
@@ -126,6 +126,7 @@ export default connect(
   createStructuredSelector({
     feedbacks: selectFeedbacks,
     showCommentForm,
+    comment: selectComment,
   }),
   dispatch => ({
     onSubmit: values => {
@@ -137,6 +138,9 @@ export default connect(
       delete values.isFocusCommentBox
       dispatch(saveFeedback(values))
       dispatch(goBack())
+    },
+    onChangeComment: comment => {
+      dispatch(changeComment(comment))
     },
   })
 )(FeedbackSurveyModal)
