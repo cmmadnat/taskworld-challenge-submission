@@ -4,7 +4,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { selectFeedbacks } from './selectors'
 import { saveFeedback } from './actions'
-import { push, goBack } from 'react-router-redux'
+import { push, goBack } from 'connected-react-router'
 
 import { feedbackSurveyItems } from './FeedbackSurveyItems'
 import { createStructuredSelector } from 'reselect'
@@ -134,9 +134,11 @@ export default connect(
     onSubmit: values => {
       delete values.isFocusCommentBox
       dispatch(saveFeedback(values))
+      dispatch(push('/terminate'))
     },
     goBack: () => {
       dispatch(goBack())
+      dispatch(saveFeedback(values))
     },
   })
 )(FeedbackSurveyModal)
