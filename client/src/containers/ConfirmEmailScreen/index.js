@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { selectTerminateAccountStatus } from './selector'
+import { selectTerminateAccountStatus, selectEmail } from './selector'
+import { user, disabledNextPage } from '../TransferScreen/selectors'
+import { resetTerminateAccountStatus, typeEmail } from './actions'
 
 import { isLoading } from '../../reference/LoadState'
 
@@ -15,6 +17,7 @@ class ConfirmEmailModal extends React.PureComponent {
     onTypeEmail: PropTypes.func,
     resetTerminateAccountStatus: PropTypes.func,
     terminateAccountStatus: PropTypes.object,
+    userEmail: PropTypes.object.isRequired,
   }
 
   state = { markedConsequences: false }
@@ -39,9 +42,9 @@ class ConfirmEmailModal extends React.PureComponent {
       <div>
         <input
           type="text"
-          placeholder="ross@example.com"
+          placeholder={this.props.userEmail.email}
           style={{ width: '350px' }}
-          onChange={this.props.onTypeEmail}
+          onChange={e => this.props.onTypeEmail(e.target.value)}
         />
         <span style={{ color: 'red' }}>{errorMessage}</span>
       </div>
@@ -81,6 +84,11 @@ class ConfirmEmailModal extends React.PureComponent {
 export default connect(
   createStructuredSelector({
     terminateAccountStatus: selectTerminateAccountStatus,
+    userEmail: user,
+    email: selectEmail,
   }),
-  dispatch => ({})
+  dispatch => ({
+    resetTerminateAccountStatus: () => dispatch(resetTerminateAccountStatus()),
+    onTypeEmail: email => dispatch(typeEmail(email)),
+  })
 )(ConfirmEmailModal)
