@@ -3,7 +3,7 @@ import {
   GET_TRANSFER_DATA_COMPLETE,
   CHECK_WORKSPACE_CONFLICT_COMPLETE,
 } from './constants'
-import * as LoadState from '../../LoadState'
+import * as LoadState from '../../reference/LoadState'
 import _ from 'lodash'
 
 const initialState = fromJS({

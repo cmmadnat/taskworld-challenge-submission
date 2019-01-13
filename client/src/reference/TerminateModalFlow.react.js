@@ -2,12 +2,12 @@ import _ from 'lodash'
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import ConfirmEmailModal from './ConfirmEmailModal.react'
+import ConfirmEmailModal from '../containers/ConfirmEmailScreen/ConfirmEmailModal.react'
 // import TransferOwnershipModal, {
 //   WorkspaceGroupRows,
 // } from './TransferOwnershipModal.react'
-import FeedbackSurveyModal from './FeedbackSurveyModal.react'
-import { submitToSurveyMonkeyDeleteAccount } from './SurveyService'
+import FeedbackSurveyModal from '../containers/FeedbackSurveyScreen/FeedbackSurveyModal.react'
+import { submitToSurveyMonkeyDeleteAccount } from '../services/SurveyService'
 import * as LoadState from './LoadState'
 // import AssignOwnership from './AssignOwnership.react'
 
