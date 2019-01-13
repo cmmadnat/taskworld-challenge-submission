@@ -2,14 +2,14 @@ import _ from 'lodash'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
-import { selectFeedbacks } from './selectors'
+import { selectFeedbacks, showCommentForm } from './selectors'
 import { saveFeedback } from './actions'
 import { push, goBack } from 'connected-react-router'
 
 import { feedbackSurveyItems } from './FeedbackSurveyItems'
 import { createStructuredSelector } from 'reselect'
 
-class FeedbackSurveyModal extends React.PureComponent {
+class FeedbackSurveyModal extends React.Component {
   static propTypes = {
     onSubmit: PropTypes.func,
     onBackButton: PropTypes.func,
@@ -123,12 +123,10 @@ class FeedbackSurveyModal extends React.PureComponent {
 }
 
 export default connect(
-  () => {
-    const fromSelectors = createStructuredSelector({
-      feedbacks: selectFeedbacks,
-    })
-    return { ...fromSelectors, showCommentForm: true }
-  },
+  createStructuredSelector({
+    feedbacks: selectFeedbacks,
+    showCommentForm,
+  }),
   dispatch => ({
     onSubmit: values => {
       delete values.isFocusCommentBox
