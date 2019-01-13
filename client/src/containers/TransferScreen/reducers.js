@@ -3,7 +3,11 @@ import { GET_TRANSFER_DATA_COMPLETE } from './constants'
 
 const initialState = fromJS({
   requiredTransferWorkspaces: [],
-  transferOwnershipStatus: {},
+  transferOwnershipStatus: {
+    workspaceId: '',
+    toUserId:'', 
+    
+  },
   deleteWorkspaces: [],
   loading: false,
   user: {},
