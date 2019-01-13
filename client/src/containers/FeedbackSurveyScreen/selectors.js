@@ -13,4 +13,8 @@ const selectComment = createSelector(
   selectDomain,
   substate => substate.comment
 )
-export { selectFeedbacks, showCommentForm, selectComment }
+const selectCommentForName = createSelector(
+  selectDomain,
+  substate => substate.commentForName
+)
+export { selectFeedbacks, showCommentForm, selectComment, selectCommentForName }

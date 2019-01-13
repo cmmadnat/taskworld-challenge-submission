@@ -1,7 +1,12 @@
 import { fromJS } from 'immutable'
-import { SAVE_FEEDBACK, CHANGE_COMMENT } from './constants'
+import {
+  SAVE_FEEDBACK,
+  CHANGE_COMMENT,
+  CHANGE_COMMENT_FOR_NAME,
+} from './constants'
 import * as feedbackSurveyItems from './FeedbackSurveyItems'
 import _ from 'lodash'
+import { changeCommentForName } from './actions'
 
 const initialStateFunc = () => {
   const feedbacks = feedbackSurveyItems.feedbackSurveyItems
@@ -14,6 +19,7 @@ const initialStateFunc = () => {
     .value()
   return fromJS({
     comment: '',
+    commentForName: [],
     feedbacks: { ...initState },
   })
 }
@@ -29,6 +35,19 @@ const reducer = (state = initialState, action) => {
     }
     case CHANGE_COMMENT: {
       return state.set('comment', action.payload)
+    }
+    case CHANGE_COMMENT_FOR_NAME: {
+      const { name, comment } = action.payload
+      let commentForName = state
+        .get('commentForName')
+        .toJS()
+        .map(it => {
+          if (it.name === name) it.comment = comment
+          it
+        })
+        .filter(it => it.comment.length != 0)
+      if (commentForName.length == 0) commentForName.push({ name, comment })
+      return state.set('commentForName', fromJS(commentForName))
     }
     default:
       return state

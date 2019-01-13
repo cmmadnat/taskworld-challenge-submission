@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 import { selectFeedbacks, showCommentForm, selectComment } from './selectors'
-import { saveFeedback, changeComment } from './actions'
+import { saveFeedback, changeComment, changeCommentForName } from './actions'
 import { push, goBack } from 'connected-react-router'
 
 import { feedbackSurveyItems } from './FeedbackSurveyItems'
@@ -17,6 +17,7 @@ class FeedbackSurveyModal extends React.Component {
     showCommentForm: PropTypes.bool,
     comment: PropTypes.string,
     onChangeComment: PropTypes.func,
+    changeCommentForName: PropTypes.func,
   }
 
   constructor(props) {
@@ -49,7 +50,12 @@ class FeedbackSurveyModal extends React.Component {
     const prefill = placeHolder && canComment ? placeHolder : ''
     return !this.state[stack] ? null : (
       <div style={!canComment ? { display: 'none' } : null}>
-        <input type="text" name={stack} ref={stack} placeholder={prefill} />
+        <input
+          type="text"
+          name={stack}
+          onChange={e => this.props.changeCommentForName(stack, e.target.value)}
+          placeholder={prefill}
+        />
       </div>
     )
   }
@@ -141,6 +147,9 @@ export default connect(
     },
     onChangeComment: comment => {
       dispatch(changeComment(comment))
+    },
+    changeCommentForName: (name, comment) => {
+      dispatch(changeCommentForName(name, comment))
     },
   })
 )(FeedbackSurveyModal)

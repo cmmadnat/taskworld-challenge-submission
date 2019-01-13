@@ -9,6 +9,7 @@ import { selectEmail } from './selector'
 import {
   selectFeedbacks,
   selectComment,
+  selectCommentForName,
 } from '../FeedbackSurveyScreen/selectors'
 import terminateAccount from '../../services/terminateAccount'
 import { submitToSurveyMonkeyDeleteAccount } from '../../services/SurveyService'
@@ -30,20 +31,26 @@ function* deleteAccountSaga() {
     }
     try {
       yield call(terminateAccount, payload)
+      const commentForName = yield select(selectCommentForName)
+      const feedbackRefs = Object.keys(feedbacks)
+        .filter(it => feedbacks[it])
+        .map(it => {
+          const filterList = commentForName.filter(it2 => it === it2.name)
+          return {
+            key: it,
+            value: filterList.length != 0 ? filterList[0].comment : '',
+          }
+        })
+      console.log(commentForName)
+      console.log(feedbackRefs)
+      const surveyPayload = {
+        feedbackRefs,
+        comment,
+      }
+      yield call(submitToSurveyMonkeyDeleteAccount, surveyPayload)
     } catch (e) {
       yield put(terminateAccountError(e.message))
     }
-    console.log('hello')
-    const feedbackRefs = feedbacks.map(it => ({
-      key: it.reason,
-      value: it.comment,
-    }))
-    console.log('hello')
-    const surveyPayload = {
-      feedbackRefs,
-      comment,
-    }
-    yield call(submitToSurveyMonkeyDeleteAccount, surveyPayload)
   } else {
     const error = 'Invalid email'
     yield put(terminateAccountError(error))
