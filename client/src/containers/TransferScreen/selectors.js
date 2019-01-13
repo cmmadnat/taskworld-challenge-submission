@@ -1,27 +1,31 @@
 import { createSelector } from 'reselect'
 
-const selectDefaultDomain = state => state['transferReducer']
+const selectDefaultDomain = state => {
+  return state['transferReducer'].toJS()
+}
 
 const transferOwnershipStatus = createSelector(
   selectDefaultDomain,
-  substate => substate.get('transferOwnershipStatus')
+  substate => substate.transferOwnershipStatus
 )
 const requiredTransferWorkspaces = createSelector(
   selectDefaultDomain,
-  substate => substate.get('requiredTransferWorkspaces')
+  substate => {
+    return substate.requiredTransferWorkspaces
+  }
 )
-const loading = createSelector(selectDefaultDomain, substate =>
-  substate.get('loading')
+const loading = createSelector(
+  selectDefaultDomain,
+  substate => substate.loading
 )
 const deleteWorkspaces = createSelector(
   selectDefaultDomain,
-  substate => substate.get('deleteWorkspaces')
+  substate => substate.deleteWorkspaces
 )
 const user = createSelector(
   selectDefaultDomain,
-  substate => substate.get('user')
-  )
-
+  substate => substate.user
+)
 
 export {
   selectDefaultDomain,
