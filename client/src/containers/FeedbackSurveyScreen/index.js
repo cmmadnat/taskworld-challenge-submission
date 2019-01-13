@@ -59,8 +59,7 @@ class FeedbackSurveyModal extends React.PureComponent {
       <div>
         <button
           onClick={() => {
-            this.props.goBack()
-            this.props.onSubmit(this.state)
+            this.props.goBack(this.state)
           }}
         >
           Back
@@ -136,9 +135,10 @@ export default connect(
       dispatch(saveFeedback(values))
       dispatch(push('/terminate'))
     },
-    goBack: () => {
-      dispatch(goBack())
+    goBack: values => {
+      delete values.isFocusCommentBox
       dispatch(saveFeedback(values))
+      dispatch(goBack())
     },
   })
 )(FeedbackSurveyModal)
