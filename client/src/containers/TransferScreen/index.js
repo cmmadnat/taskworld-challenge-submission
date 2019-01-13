@@ -97,7 +97,9 @@ const withConnect = connect(
   }),
   dispatch => ({
     getTransferData: () => [],
-    onAssignToUser: () => ({}),
+    onAssignToUser: (workspace, user) => {
+      dispatch(checkWorkspaceConflict(workspace, user))
+    },
     onSetNextPage: () => ({}),
   })
 )
