@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import createSagaMiddleware from 'redux-saga'
 
 import './index.css'
 import MockDataProvider from './MockDataProvider'
@@ -13,8 +14,12 @@ import TransferScreen from './containers/TransferScreen/index'
 import FeedbackSurveyScreen from './containers/FeedbackSurveyScreen/index'
 import ConfirmEmailScreen from './containers/ConfirmEmailScreen/index'
 import { getTransferData } from './actions'
+import rootSaga from './sagas'
 
-const store = createStore(combineReducers({ transferReducer }))
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(combineReducers({ transferReducer }),applyMiddleware(sagaMiddleware) )
+
+sagaMiddleware.run(rootSaga)
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,11 +1,17 @@
-import { takeLatest, put } from 'redux-saga'
+import { takeLatest, put ,call} from 'redux-saga/effects'
 import { GET_TRANSFER_DATA } from './constants'
-import { getTransferDataComplete } from './actions'
+import { getTransferDataComplete } from './containers/TransferScreen/actions'
+import service from './services/fetchRelatedSpace'
+const user = {
+  _id: 'user1',
+  name: 'Ross Lynch',
+  email: 'ross@example.com',
+}
 function* getTransferData() {
-  console.log('get transfer data')
-  yield put(getTransferDataComplete({ hello: 'world' }))
+  const data = yield call(service, user._id)
+  yield put(getTransferDataComplete(data))
 }
 
-function* rootSaga() {
-  takeLatest(GET_TRANSFER_DATA, getTransferData)
+export default function* rootSaga() {
+  yield takeLatest(GET_TRANSFER_DATA, getTransferData)
 }
