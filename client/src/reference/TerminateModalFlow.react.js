@@ -6,7 +6,7 @@ import ConfirmEmailModal from '../containers/ConfirmEmailScreen/ConfirmEmailModa
 // import TransferOwnershipModal, {
 //   WorkspaceGroupRows,
 // } from './TransferOwnershipModal.react'
-import FeedbackSurveyModal from '../containers/FeedbackSurveyScreen/FeedbackSurveyModal.react'
+import FeedbackSurveyModal from '../containers/FeedbackSurveyScreen'
 import { submitToSurveyMonkeyDeleteAccount } from '../services/SurveyService'
 import * as LoadState from './LoadState'
 // import AssignOwnership from './AssignOwnership.react'
