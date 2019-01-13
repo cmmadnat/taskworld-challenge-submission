@@ -2,13 +2,19 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
+import {
+  ConnectedRouter,
+  connectRouter,
+  routerMiddleware,
+} from 'connected-react-router'
+import { createBrowserHistory } from 'history'
+
 import createSagaMiddleware from 'redux-saga'
 
 import './index.css'
-import MockDataProvider from './MockDataProvider'
-import TerminateModalFlow from './TerminateModalFlow.react'
 import transferReducer from './containers/TransferScreen/reducers'
+import feedbackReducer from './containers/FeedbackSurveyScreen/reducers'
 
 import TransferScreen from './containers/TransferScreen/index'
 import FeedbackSurveyScreen from './containers/FeedbackSurveyScreen/index'
@@ -20,9 +26,11 @@ import transferScreenSaga from './containers/TransferScreen/sagas'
 const sagaMiddleware = createSagaMiddleware()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
+export const history = createBrowserHistory()
+
 const store = createStore(
-  combineReducers({ transferReducer }),
-  composeEnhancers(applyMiddleware(sagaMiddleware))
+  createReducers(history),
+  composeEnhancers(applyMiddleware(sagaMiddleware, routerMiddleware(history)))
 )
 
 sagaMiddleware.run(rootSaga)
@@ -30,7 +38,7 @@ sagaMiddleware.run(transferScreenSaga)
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <ConnectedRouter history={history}>
       <div>
         <Route
           path="/"
@@ -43,10 +51,7 @@ ReactDOM.render(
         <Route path="/feedback/" component={FeedbackSurveyScreen} />
         <Route path="/terminate/" component={ConfirmEmailScreen} />
       </div>
-    </Router>
-    {/* <MockDataProvider>
-      {props => <TerminateModalFlow {...props} />}
-    </MockDataProvider> */}
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 )
@@ -54,4 +59,11 @@ ReactDOM.render(
 // Hot Module Replacement
 if (module.hot) {
   module.hot.accept()
+}
+function createReducers(history) {
+  return combineReducers({
+    transferReducer,
+    feedbackReducer,
+    router: connectRouter(history),
+  })
 }
