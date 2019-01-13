@@ -27,6 +27,10 @@ const user = createSelector(
   substate => substate.user
 )
 
+const getTransferData = createSelector(
+  selectDefaultDomain,
+  substate => substate.transferData
+)
 export {
   selectDefaultDomain,
   transferOwnershipStatus,
@@ -34,4 +38,5 @@ export {
   deleteWorkspaces,
   loading,
   user,
+  getTransferData,
 }

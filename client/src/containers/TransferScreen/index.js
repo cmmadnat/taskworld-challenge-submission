@@ -16,6 +16,7 @@ import {
   selectDefaultDomain,
   transferOwnershipStatus,
   user,
+  getTransferData,
 } from './selectors'
 import { checkWorkspaceConflict } from './actions'
 
@@ -35,7 +36,7 @@ class TransferModal extends React.Component {
       transferOwnershipStatus,
     } = this.props
 
-    const transferData = getTransferData()
+    const transferData = getTransferData
     const totalAssigned = transferData.filter(it => it.status === 'completed')
       .length
 
@@ -65,7 +66,7 @@ class TransferModal extends React.Component {
         >
           <AssignOwnership
             user={user}
-            transferData={getTransferData()}
+            transferData={getTransferData}
             onAssignToUser={onAssignToUser}
           />
         </WorkspaceGroupRows>
@@ -84,7 +85,7 @@ TransferModal.propTypes = {
   deleteWorkspaces: propTypes.array.isRequired,
   loading: propTypes.bool.isRequired,
   user: propTypes.object.isRequired,
-  getTransferData: propTypes.func.isRequired,
+  getTransferData: propTypes.array.isRequired,
   onAssignToUser: propTypes.func.isRequired,
   onSetNextPage: propTypes.func.isRequired,
 }
@@ -95,9 +96,9 @@ const withConnect = connect(
     deleteWorkspaces,
     loading,
     user,
+    getTransferData,
   }),
   dispatch => ({
-    getTransferData: () => [],
     onAssignToUser: (workspace, user) => {
       dispatch(checkWorkspaceConflict(workspace, user))
     },
